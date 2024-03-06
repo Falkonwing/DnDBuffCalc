@@ -135,22 +135,23 @@ function Calculator() {
     }  
 
     return (
-        <div className="App m-4">
-            <div className="flex flex-col border border-black my-4 py-4 text-xl justify-center" >
-                <div className="flex flex-row justify-between">
+        <div className="flex flex-col justify-center App m-4">
+            <div className="flex flex-col border border-black my-4 py-4 text-xl justify-center rounded lg:w-1/3" >
+                <div className="font-semibold">Base Values</div>
+                <div className="flex flex-row justify-between m-4">
                     <div className="flex flex-row flex-wrap items-center" >
                         <label className="mr-2">BaseAttack:</label>
-                        <div>{baseAttack} </div>
+                        <div className="border rounded w-8 h-8 ">{baseAttack} </div>
                     </div>
                     <div className="flex flex-row mx-4" >
                         <BiSolidPlusCircle  onClick={() => {setBaseAttack(baseAttack + 1)}} className="text-5xl text-green-500" />
                         <BiSolidMinusCircle onClick={() => {setBaseAttack(baseAttack - 1)}} className="text-5xl text-red-500" />
                     </div>
                 </div>
-                <div className="flex flex-row justify-between">
+                <div className="flex flex-row justify-between m-4">
                     <div className="flex flex-row flex-wrap items-center" >
                         <label className="mr-2">Default Strength:</label>
-                        <div>{strength} </div>
+                        <div className="border rounded w-8 h-8 ">{strength} </div>
                     </div>
                     <div className="flex flex-row mx-4" >
                         <BiSolidPlusCircle  onClick={() => {setStrength(strength + 1)}} className="text-5xl text-green-500" />
@@ -158,7 +159,8 @@ function Calculator() {
                     </div>
                 </div>
             </div>
-            <div className="border border-black my-4 py-4 text-xl">
+            <div className="border border-black my-4 py-4 text-xl rounded lg:w-1/3">
+                <div className="font-semibold">Buffs</div>
                 {BuffList.map((buff) => (
                     <div key={buff.name}>
                     <label>
@@ -173,9 +175,10 @@ function Calculator() {
                     </div>
                 ))}
             </div>
-            <div className="border border-black my-4 py-4 text-xl" >
-                    <div><label>Calculated Attack: </label>{showAttack(calculateAttack())}</div>
-                    <div><label>Calculated Two-Hand Damage: </label>{showDamage()}</div>
+            <div className="border border-black my-4 py-4 text-xl rounded lg:w-1/3" >
+                <div className="font-semibold">Calculated Values</div>
+                    <div><label>Attack: </label>{showAttack(calculateAttack())}</div>
+                    <div><label>Two-Hand Damage: </label>{showDamage()}</div>
             </div>
         </div>
     );
