@@ -47,6 +47,9 @@ const sizeTable = [
     {medium: new WeaponDamageDice('2d6') , large: new WeaponDamageDice('3d6')},
     {medium: new WeaponDamageDice('2d8') , large: new WeaponDamageDice('3d8')},
     {medium: new WeaponDamageDice('2d10') , large: new WeaponDamageDice('4d8')},
+    {medium: new WeaponDamageDice('3d6') , large: new WeaponDamageDice('4d6')},
+    {medium: new WeaponDamageDice('3d8') , large: new WeaponDamageDice('4d8')},
+    {medium: new WeaponDamageDice('4d8') , large: new WeaponDamageDice('6d8')},
 ]
 
 // List of Buffs:
@@ -132,7 +135,14 @@ function Calculator() {
             if(Buff.Strength && checkboxState[Buff.name]) StrengthBonusFromBuffs += Buff.Strength;
         })
         return parseInt(strength) + parseInt(StrengthBonusFromBuffs);
-    }  
+    }
+
+    const renderWeaponOptions = () => {
+        const weaponOptions = ['1d2','1d3','1d4','1d6','1d8','1d10','1d12','2d4','2d6'];
+        return weaponOptions.map((WeaponDmg) => {
+            return (<option key={WeaponDmg} value={WeaponDmg}>{WeaponDmg}</option>)
+        })
+    }
 
     return (
         <div className="flex flex-col justify-center App m-4">
@@ -157,6 +167,18 @@ function Calculator() {
                         <BiSolidPlusCircle  onClick={() => {setStrength(strength + 1)}} className="text-5xl text-green-500" />
                         <BiSolidMinusCircle onClick={() => {setStrength(strength - 1)}}  className="text-5xl text-red-500" />
                     </div>
+                </div>
+                <div className="flex flex-row justify-between m-4">
+                    <label className="mr-2">Weapon BaseDamage:</label>
+                    <select
+                        name="baseWeaponDamage"
+                        id="baseWeaponDamage"
+                        defaultValue="2d4"
+                        onChange={(e) => setBaseWeaponDamage(new WeaponDamageDice(e.target.value))}
+                        className="w-32 py-2 pl-3 pr-10 text-base bg-white border border-gray-300 rounded-md shadow-sm cursor-pointer focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500"
+                    >
+                        {renderWeaponOptions()}
+                    </select>
                 </div>
             </div>
             <div className="border border-black my-4 py-4 text-xl rounded lg:w-1/3">
